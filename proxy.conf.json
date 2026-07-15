@@ -1,0 +1,7 @@
+{
+  "/acd-studio-datamaps": {
+    "target": "https://localhost:7017",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
