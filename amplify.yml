@@ -3,8 +3,13 @@ backend:
   phases:
     build:
       commands:
-        - (cd backend && npm install)
-        - echo "Backend built successfully"
+        # Install backend dependencies
+        - cd backend && npm install
+        # Create Lambda deployment package
+        - zip -r ../backend-lambda.zip . -x "node_modules/*" ".git/*"
+        - cd .. && mkdir -p .amplify-hosting/compute
+        - mv backend-lambda.zip .amplify-hosting/compute/default.zip
+        - echo "Backend Lambda package created"
 frontend:
   phases:
     preBuild:
