@@ -1,39 +1,34 @@
 version: 1
-backend:
-  phases:
-    build:
-      commands:
-        # Install backend dependencies
-        - cd backend
-        - npm install --registry=https://registry.npmjs.org/
-        # Prepare Amplify Hosting Compute structure
-        - mkdir -p .amplify-hosting/compute/default
-        # Copy all backend files to compute directory
-        - cp server.js .amplify-hosting/compute/default/
-        - cp bedrock-service.js .amplify-hosting/compute/default/
-        - cp package.json .amplify-hosting/compute/default/
-        - cp .npmrc .amplify-hosting/compute/default/
-        - cp -r node_modules .amplify-hosting/compute/default/
-        # Copy mock data from frontend
-        - cp ../src/app/shared/data/mock-datamaps.json .amplify-hosting/compute/default/
-        # Copy deployment manifest
-        - cp deploy-manifest.json .amplify-hosting/
-        - echo "Backend compute package created"
-        - cd ..
-  artifacts:
-    baseDirectory: backend/.amplify-hosting
-    files:
-      - '**/*'
 frontend:
   phases:
     preBuild:
       commands:
+        # Install frontend dependencies
         - npm install
+        # Install backend dependencies
+        - cd backend
+        - npm install --registry=https://registry.npmjs.org/
+        - cd ..
     build:
       commands:
+        # Build frontend
         - npm run build
+        # Prepare Amplify Hosting Compute structure
+        - mkdir -p .amplify-hosting/compute/default
+        - mkdir -p .amplify-hosting/static
+        # Copy backend files to compute directory
+        - cp backend/server.js .amplify-hosting/compute/default/
+        - cp backend/bedrock-service.js .amplify-hosting/compute/default/
+        - cp backend/package.json .amplify-hosting/compute/default/
+        - cp backend/.npmrc .amplify-hosting/compute/default/
+        - cp -r backend/node_modules .amplify-hosting/compute/default/
+        - cp src/app/shared/data/mock-datamaps.json .amplify-hosting/compute/default/
+        - cp backend/deploy-manifest.json .amplify-hosting/
+        # Copy frontend build to static directory
+        - cp -r dist/acd-studio-datamaps-search-ui/browser/* .amplify-hosting/static/
+        - echo "Amplify Hosting Compute structure created"
   artifacts:
-    baseDirectory: dist/acd-studio-datamaps-search-ui/browser
+    baseDirectory: .amplify-hosting
     files:
       - '**/*'
   cache:
