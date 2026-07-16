@@ -45,17 +45,32 @@ This prototype demonstrates intelligent, intent-based search capabilities for AC
 
 - **Node.js** 16+ and npm
 - **Angular CLI** 17+
-- **AWS Credentials** configured (AWS CLI or environment variables)
-- **AWS Bedrock Access** with Claude models enabled in us-east-1
+- **AWS Account** with access to Bedrock in us-east-1
+- **AWS Bedrock API Key** (see setup instructions below)
 
 ## 🚀 Quick Start
 
-### 1. Install Dependencies
+### 1. Create AWS Bedrock API Key
 
-#### Frontend
+1. Log in to AWS Console: https://us-east-1.console.aws.amazon.com/bedrock/home?region=us-east-1#/api-keys
+2. Click **"Create API Key"**
+3. Give it a name (e.g., `sparkathon-demo`)
+4. Copy the generated API key (it will be a base64-encoded string starting with `ABSK...`)
+
+### 2. Configure Backend Environment
+
 ```bash
-npm install
+cd backend
+cp .env.example .env
 ```
+
+Edit `backend/.env` and add your Bedrock API key:
+```bash
+AWS_BEARER_TOKEN_BEDROCK=your-api-key-here
+AWS_REGION=us-east-1
+```
+
+### 3. Install Dependencies
 
 #### Backend
 ```bash
@@ -64,7 +79,12 @@ npm install
 cd ..
 ```
 
-### 2. Start the Backend API
+#### Frontend
+```bash
+npm install
+```
+
+### 4. Start the Backend API
 
 ```bash
 cd backend
@@ -73,7 +93,14 @@ npm start
 
 The API will start on `http://localhost:3000`
 
-### 3. Start the Angular Frontend
+You should see:
+```
+✅ Using Bedrock API Key authentication (Bearer Token)
+Loaded 10 mock DataMaps
+🚀 Server running on: http://localhost:3000
+```
+
+### 5. Start the Angular Frontend
 
 In a new terminal:
 
