@@ -2,11 +2,11 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Copy package files and .npmrc
+COPY package*.json .npmrc ./
 
-# Install dependencies
-RUN npm install --production
+# Install dependencies using public npm registry
+RUN npm install --production --registry=https://registry.npmjs.org/
 
 # Copy application code
 COPY . .
