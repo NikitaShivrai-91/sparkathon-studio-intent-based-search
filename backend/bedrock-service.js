@@ -2,9 +2,36 @@ const { BedrockRuntimeClient, InvokeModelCommand } = require("@aws-sdk/client-be
 
 class BedrockService {
   constructor() {
-    this.client = new BedrockRuntimeClient({
+    // Configure client
+    const clientConfig = {
       region: process.env.AWS_REGION || "us-east-1"
-    });
+    };
+
+    this.client = new BedrockRuntimeClient(clientConfig);
+
+    // Add bearer token middleware for Bedrock API key authentication
+    // API keys use Bearer token authentication, NOT IAM credentials
+    if (process.env.AWS_BEARER_TOKEN_BEDROCK) {
+      this.client.middlewareStack.add(
+        (next) => async (args) => {
+          // Add Authorization header with Bearer token
+          if (!args.request.headers) {
+            args.request.headers = {};
+          }
+          args.request.headers["Authorization"] = `Bearer ${process.env.AWS_BEARER_TOKEN_BEDROCK}`;
+          return next(args);
+        },
+        {
+          name: "addBearerToken",
+          step: "build",
+          priority: "high"
+        }
+      );
+      console.log("✅ Using Bedrock API Key authentication (Bearer Token)");
+    } else {
+      console.log("✅ Using default AWS credentials (IAM/SSO)");
+    }
+
     // Use cross-region inference profile for Claude Sonnet 4.5
     this.modelId = "us.anthropic.claude-sonnet-4-5-20250929-v1:0";
   }

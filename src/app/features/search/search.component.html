@@ -30,7 +30,7 @@
     </div>
     <div class="sidebar-item active">
       <mat-icon>list_alt</mat-icon>
-      <span>Dictionaries</span>
+      <span>Data Maps</span>
     </div>
     <div class="sidebar-section-label">SETTINGS</div>
     <div class="sidebar-item">
@@ -62,7 +62,7 @@
     <div class="summary-cards">
       <div class="summary-card">
         <div class="card-header-row">
-          <span class="card-title">Dictionaries</span>
+          <span class="card-title">Data Maps</span>
           <mat-icon class="card-icon">article</mat-icon>
         </div>
         <div class="card-stats">
@@ -74,7 +74,7 @@
 
       <div class="summary-card">
         <div class="card-header-row">
-          <span class="card-title">Archived Dictionaries</span>
+          <span class="card-title">Archived Data Maps</span>
           <mat-icon class="card-icon">inventory_2</mat-icon>
         </div>
         <div class="card-archive-value">00</div>
@@ -147,9 +147,9 @@
     <div class="table-wrapper">
       <table mat-table [dataSource]="results" class="data-table">
 
-        <!-- Dictionary Name -->
+        <!-- Data Map Name -->
         <ng-container matColumnDef="dataMapName">
-          <th mat-header-cell *matHeaderCellDef>DICTIONARY NAME</th>
+          <th mat-header-cell *matHeaderCellDef>DATA MAP NAME</th>
           <td mat-cell *matCellDef="let row">
             <a class="name-link">{{ row.dataMapName }}</a>
           </td>
@@ -170,12 +170,12 @@
         </ng-container>
 
         <!-- Status -->
-        <ng-container matColumnDef="isLocked">
+        <ng-container matColumnDef="status">
           <th mat-header-cell *matHeaderCellDef>STATUS</th>
           <td mat-cell *matCellDef="let row">
-            <span class="status-badge" [ngClass]="row.isLocked ? 'status-locked' : 'status-active'">
-              <mat-icon class="status-icon">{{ row.isLocked ? 'lock' : 'check_circle' }}</mat-icon>
-              {{ row.isLocked ? 'Locked' : 'Active' }}
+            <span class="status-badge" [ngClass]="row.status === 'active' ? 'status-active' : 'status-inactive'">
+              <mat-icon class="status-icon">{{ row.status === 'active' ? 'check_circle' : 'cancel' }}</mat-icon>
+              {{ row.status === 'active' ? 'Active' : 'Inactive' }}
             </span>
           </td>
         </ng-container>

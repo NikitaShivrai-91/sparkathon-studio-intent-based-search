@@ -55,7 +55,7 @@ export class SearchComponent implements OnInit {
 
   displayedColumns = [
     'dataMapName', 'description', 'numberOfEntries',
-    'isLocked', 'updatedDate', 'sizeInBytes', 'actions'
+    'status', 'updatedDate', 'sizeInBytes', 'actions'
   ];
 
   exampleQueries = [

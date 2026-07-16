@@ -40,7 +40,7 @@ export interface DataMap {
   dataMapName: string;
   divisionId: number;
   description: string;
-  isLocked: boolean;
+  status: 'active' | 'inactive';
   createdDate: string;
   updatedDate: string;
   numberOfEntries: number;
@@ -56,6 +56,7 @@ export interface DataMap {
   sizeUsed?: number;
   version?: number;
   keyValuePair?: DataMapKeyValueItem[]; // old format
+  isLocked?: boolean; // deprecated, kept for backwards compatibility
 }
 
 export interface SearchResponse {
