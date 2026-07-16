@@ -6,7 +6,7 @@ WORKDIR /app
 COPY package*.json .npmrc ./
 
 # Install dependencies using public npm registry
-RUN npm install --production --registry=https://registry.npmjs.org/
+RUN npm install --registry=https://registry.npmjs.org/
 
 # Copy application code
 COPY . .
