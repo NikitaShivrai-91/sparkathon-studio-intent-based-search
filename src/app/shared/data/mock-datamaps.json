@@ -1,0 +1,402 @@
+[
+  {
+    "dataMapName": "ACD_Skills_Primary",
+    "divisionId": 1,
+    "description": "Primary ACD skills dictionary for agent routing",
+    "isLocked": false,
+    "createdDate": "2026-05-10T09:00:00Z",
+    "updatedDate": "2026-07-14T16:20:00Z",
+    "numberOfEntries": 1,
+    "sizeInBytes": 512,
+    "keyValuePairs": [
+      {
+        "name": "skill_1",
+        "value": 1328638,
+        "dataType": "int",
+        "entity": "skills",
+        "entityType": "ACD"
+      }
+    ]
+  },
+  {
+    "dataMapName": "ACD_Skills_Extended",
+    "divisionId": 1,
+    "description": "Extended ACD skills with multiple data types",
+    "isLocked": false,
+    "createdDate": "2026-06-01T10:15:00Z",
+    "updatedDate": "2026-07-13T14:30:00Z",
+    "numberOfEntries": 4,
+    "sizeInBytes": 2048,
+    "keyValuePairs": [
+      {
+        "name": "skill_1",
+        "value": "technical_support",
+        "dataType": "string",
+        "entity": "skills",
+        "entityType": "ACD"
+      },
+      {
+        "name": "skill_2",
+        "value": true,
+        "dataType": "bool",
+        "entity": "skills",
+        "entityType": "ACD"
+      },
+      {
+        "name": "skill_3",
+        "value": 5,
+        "dataType": "int",
+        "entity": "skills",
+        "entityType": "ACD"
+      },
+      {
+        "name": "skill_4",
+        "value": 3.75,
+        "dataType": "double",
+        "entity": "skills",
+        "entityType": "ACD"
+      }
+    ]
+  },
+  {
+    "dataMapName": "Customer_Service_Skills",
+    "divisionId": 1,
+    "description": "Customer service team skills mapping",
+    "isLocked": false,
+    "createdDate": "2026-06-12T11:30:00Z",
+    "updatedDate": "2026-07-12T09:45:00Z",
+    "numberOfEntries": 3,
+    "sizeInBytes": 1536,
+    "keyValuePairs": [
+      {
+        "name": "cs_skill_1",
+        "value": "customer_support",
+        "dataType": "string",
+        "entity": "skills",
+        "entityType": "ACD"
+      },
+      {
+        "name": "cs_skill_2",
+        "value": 8,
+        "dataType": "int",
+        "entity": "skills",
+        "entityType": "ACD"
+      },
+      {
+        "name": "cs_skill_3",
+        "value": 4.5,
+        "dataType": "double",
+        "entity": "skills",
+        "entityType": "ACD"
+      }
+    ]
+  },
+  {
+    "dataMapName": "Agent_Queue_Config",
+    "divisionId": 1,
+    "description": "Agent queue configuration settings",
+    "isLocked": true,
+    "createdDate": "2026-06-20T08:00:00Z",
+    "updatedDate": "2026-07-10T17:00:00Z",
+    "numberOfEntries": 5,
+    "sizeInBytes": 2560,
+    "keyValuePairs": [
+      {
+        "name": "queue_1",
+        "value": 100,
+        "dataType": "int",
+        "entity": "queues",
+        "entityType": "ACD"
+      },
+      {
+        "name": "queue_2",
+        "value": true,
+        "dataType": "bool",
+        "entity": "queues",
+        "entityType": "ACD"
+      },
+      {
+        "name": "queue_3",
+        "value": "priority_high",
+        "dataType": "string",
+        "entity": "queues",
+        "entityType": "ACD"
+      },
+      {
+        "name": "queue_4",
+        "value": 2.5,
+        "dataType": "double",
+        "entity": "queues",
+        "entityType": "ACD"
+      },
+      {
+        "name": "queue_5",
+        "value": 50,
+        "dataType": "int",
+        "entity": "queues",
+        "entityType": "ACD"
+      }
+    ]
+  },
+  {
+    "dataMapName": "Billing_Rules_Simple",
+    "divisionId": 1,
+    "description": "Simplified billing rules configuration",
+    "isLocked": false,
+    "createdDate": "2026-06-25T13:20:00Z",
+    "updatedDate": "2026-07-09T11:15:00Z",
+    "numberOfEntries": 2,
+    "sizeInBytes": 1024,
+    "keyValuePairs": [
+      {
+        "name": "billing_1",
+        "value": 25.99,
+        "dataType": "double",
+        "entity": "none",
+        "entityType": "general"
+      },
+      {
+        "name": "billing_2",
+        "value": true,
+        "dataType": "bool",
+        "entity": "none",
+        "entityType": "general"
+      }
+    ]
+  },
+  {
+    "dataMapName": "Team_Assignments",
+    "divisionId": 1,
+    "description": "Team member assignments and roles",
+    "isLocked": false,
+    "createdDate": "2026-06-28T14:45:00Z",
+    "updatedDate": "2026-07-11T10:30:00Z",
+    "numberOfEntries": 6,
+    "sizeInBytes": 3072,
+    "keyValuePairs": [
+      {
+        "name": "team_1",
+        "value": "support_team_alpha",
+        "dataType": "string",
+        "entity": "teams",
+        "entityType": "ACD"
+      },
+      {
+        "name": "team_2",
+        "value": 12,
+        "dataType": "int",
+        "entity": "teams",
+        "entityType": "ACD"
+      },
+      {
+        "name": "team_3",
+        "value": true,
+        "dataType": "bool",
+        "entity": "teams",
+        "entityType": "ACD"
+      },
+      {
+        "name": "team_4",
+        "value": "lead_supervisor",
+        "dataType": "string",
+        "entity": "teams",
+        "entityType": "ACD"
+      },
+      {
+        "name": "team_5",
+        "value": 8,
+        "dataType": "int",
+        "entity": "teams",
+        "entityType": "ACD"
+      },
+      {
+        "name": "team_6",
+        "value": 1.5,
+        "dataType": "double",
+        "entity": "teams",
+        "entityType": "ACD"
+      }
+    ]
+  },
+  {
+    "dataMapName": "Hours_Of_Operation",
+    "divisionId": 1,
+    "description": "Business hours and holiday schedule",
+    "isLocked": false,
+    "createdDate": "2026-07-01T07:30:00Z",
+    "updatedDate": "2026-07-08T16:45:00Z",
+    "numberOfEntries": 3,
+    "sizeInBytes": 1536,
+    "keyValuePairs": [
+      {
+        "name": "hours_1",
+        "value": "09:00-17:00",
+        "dataType": "string",
+        "entity": "hoursofoperations",
+        "entityType": "general"
+      },
+      {
+        "name": "hours_2",
+        "value": true,
+        "dataType": "bool",
+        "entity": "hoursofoperations",
+        "entityType": "general"
+      },
+      {
+        "name": "hours_3",
+        "value": 5,
+        "dataType": "int",
+        "entity": "hoursofoperations",
+        "entityType": "general"
+      }
+    ]
+  },
+  {
+    "dataMapName": "SLA_Metrics",
+    "divisionId": 1,
+    "description": "Service level agreement metrics and thresholds",
+    "isLocked": false,
+    "createdDate": "2026-07-03T12:00:00Z",
+    "updatedDate": "2026-07-14T09:00:00Z",
+    "numberOfEntries": 4,
+    "sizeInBytes": 2048,
+    "keyValuePairs": [
+      {
+        "name": "sla_1",
+        "value": 20,
+        "dataType": "int",
+        "entity": "none",
+        "entityType": "general"
+      },
+      {
+        "name": "sla_2",
+        "value": 0.95,
+        "dataType": "double",
+        "entity": "none",
+        "entityType": "general"
+      },
+      {
+        "name": "sla_3",
+        "value": true,
+        "dataType": "bool",
+        "entity": "none",
+        "entityType": "general"
+      },
+      {
+        "name": "sla_4",
+        "value": "high_priority",
+        "dataType": "string",
+        "entity": "none",
+        "entityType": "general"
+      }
+    ]
+  },
+  {
+    "dataMapName": "Agent_Skills_Complete",
+    "divisionId": 1,
+    "description": "Complete agent skills and proficiency levels",
+    "isLocked": false,
+    "createdDate": "2026-07-05T15:15:00Z",
+    "updatedDate": "2026-07-15T08:30:00Z",
+    "numberOfEntries": 7,
+    "sizeInBytes": 3584,
+    "keyValuePairs": [
+      {
+        "name": "agent_skill_1",
+        "value": "technical_support_l2",
+        "dataType": "string",
+        "entity": "agents",
+        "entityType": "ACD"
+      },
+      {
+        "name": "agent_skill_2",
+        "value": 85,
+        "dataType": "int",
+        "entity": "agents",
+        "entityType": "ACD"
+      },
+      {
+        "name": "agent_skill_3",
+        "value": true,
+        "dataType": "bool",
+        "entity": "agents",
+        "entityType": "ACD"
+      },
+      {
+        "name": "agent_skill_4",
+        "value": 4.2,
+        "dataType": "double",
+        "entity": "agents",
+        "entityType": "ACD"
+      },
+      {
+        "name": "agent_skill_5",
+        "value": "certification_active",
+        "dataType": "string",
+        "entity": "agents",
+        "entityType": "ACD"
+      },
+      {
+        "name": "agent_skill_6",
+        "value": 3,
+        "dataType": "int",
+        "entity": "agents",
+        "entityType": "ACD"
+      },
+      {
+        "name": "agent_skill_7",
+        "value": false,
+        "dataType": "bool",
+        "entity": "agents",
+        "entityType": "ACD"
+      }
+    ]
+  },
+  {
+    "dataMapName": "Escalation_Config",
+    "divisionId": 1,
+    "description": "Escalation rules and contact hierarchy",
+    "isLocked": true,
+    "createdDate": "2026-07-08T09:45:00Z",
+    "updatedDate": "2026-07-15T14:00:00Z",
+    "numberOfEntries": 5,
+    "sizeInBytes": 2560,
+    "keyValuePairs": [
+      {
+        "name": "escalation_1",
+        "value": "supervisor_level_1",
+        "dataType": "string",
+        "entity": "agents",
+        "entityType": "ACD"
+      },
+      {
+        "name": "escalation_2",
+        "value": 15,
+        "dataType": "int",
+        "entity": "agents",
+        "entityType": "ACD"
+      },
+      {
+        "name": "escalation_3",
+        "value": true,
+        "dataType": "bool",
+        "entity": "agents",
+        "entityType": "ACD"
+      },
+      {
+        "name": "escalation_4",
+        "value": 2.0,
+        "dataType": "double",
+        "entity": "agents",
+        "entityType": "ACD"
+      },
+      {
+        "name": "escalation_5",
+        "value": "manager_level_2",
+        "dataType": "string",
+        "entity": "agents",
+        "entityType": "ACD"
+      }
+    ]
+  }
+]

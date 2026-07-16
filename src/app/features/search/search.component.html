@@ -1,0 +1,259 @@
+<!-- Top Header Bar -->
+<div class="top-header">
+  <div class="header-left">
+    <mat-icon class="menu-icon">apps</mat-icon>
+    <span class="header-brand">Studio</span>
+  </div>
+  <div class="header-center">
+    <span class="cxone-logo">CX<span class="logo-highlight">one</span></span>
+  </div>
+  <div class="header-right">
+    <mat-icon class="header-icon">help_outline</mat-icon>
+    <mat-icon class="header-icon">desktop_windows</mat-icon>
+    <mat-icon class="header-icon">notifications</mat-icon>
+    <div class="avatar">TS</div>
+  </div>
+</div>
+
+<!-- Body Layout -->
+<div class="body-layout">
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-item">
+      <mat-icon>description</mat-icon>
+      <span>Scripts</span>
+    </div>
+    <div class="sidebar-item">
+      <mat-icon>record_voice_over</mat-icon>
+      <span>Prompts</span>
+    </div>
+    <div class="sidebar-item active">
+      <mat-icon>list_alt</mat-icon>
+      <span>Dictionaries</span>
+    </div>
+    <div class="sidebar-section-label">SETTINGS</div>
+    <div class="sidebar-item">
+      <mat-icon>account_tree</mat-icon>
+      <span>Development Workflow</span>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+
+    <!-- Page Title Row -->
+    <div class="page-title-row">
+      <h1 class="page-title">Data Maps</h1>
+      <div class="title-actions">
+        <button mat-stroked-button class="action-btn">
+          <mat-icon>download</mat-icon> Import
+        </button>
+        <button mat-stroked-button class="action-btn">
+          <mat-icon>upload</mat-icon> Export
+        </button>
+        <button mat-flat-button color="primary" class="new-btn">
+          <mat-icon>add</mat-icon> New Data Map
+        </button>
+      </div>
+    </div>
+
+    <!-- Summary Cards -->
+    <div class="summary-cards">
+      <div class="summary-card">
+        <div class="card-header-row">
+          <span class="card-title">Dictionaries</span>
+          <mat-icon class="card-icon">article</mat-icon>
+        </div>
+        <div class="card-stats">
+          Total&nbsp;<strong>:{{ results.length || 10 }}</strong>&nbsp;&nbsp;
+          Active&nbsp;<strong>:{{ results.length || 10 }}</strong>&nbsp;&nbsp;
+          Unused&nbsp;<strong>:{{ 0 }}</strong>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-header-row">
+          <span class="card-title">Archived Dictionaries</span>
+          <mat-icon class="card-icon">inventory_2</mat-icon>
+        </div>
+        <div class="card-archive-value">00</div>
+      </div>
+
+      <div class="summary-card">
+        <div class="card-header-row">
+          <span class="card-title">Storage Usage</span>
+        </div>
+        <mat-progress-bar mode="determinate" [value]="40" class="storage-bar"></mat-progress-bar>
+        <div class="storage-text">20 MB used of 50 MB total</div>
+      </div>
+    </div>
+
+    <!-- Search & Filter Row -->
+    <div class="search-filter-row">
+      <div class="search-input-wrap">
+        <mat-icon class="search-icon">search</mat-icon>
+        <input
+          class="search-input"
+          [(ngModel)]="prompt"
+          (keyup.enter)="search()"
+          placeholder="Search Data Maps with AI... (e.g., 'find billing configurations')"
+        />
+        <button class="search-go-btn" (click)="search()" [disabled]="loading || loadingList || !prompt.trim()">
+          <mat-icon *ngIf="!loading">auto_awesome</mat-icon>
+          <mat-spinner *ngIf="loading" diameter="16"></mat-spinner>
+        </button>
+        <button *ngIf="searched" class="clear-btn" (click)="clearSearch()" matTooltip="Clear search">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <button mat-icon-button class="filter-btn">
+        <mat-icon>filter_list</mat-icon>
+      </button>
+    </div>
+
+    <!-- Example Queries (shown when not searching) -->
+    <div class="example-queries" *ngIf="!searched && !loading">
+      <div class="example-label">
+        <mat-icon>lightbulb_outline</mat-icon>
+        Try these example queries:
+      </div>
+      <mat-chip-listbox>
+        <mat-chip *ngFor="let query of exampleQueries" (click)="useExampleQuery(query)" class="example-chip">
+          {{ query }}
+        </mat-chip>
+      </mat-chip-listbox>
+    </div>
+
+    <!-- Search Results Info -->
+    <div class="search-results-info" *ngIf="searched && !loading">
+      <div class="results-summary">
+        <mat-icon>check_circle</mat-icon>
+        <span>Found <strong>{{ totalResults }}</strong> result(s) for "<strong>{{ searchQuery }}</strong>"</span>
+      </div>
+      <div class="token-usage" *ngIf="tokenUsage">
+        <mat-icon>analytics</mat-icon>
+        <span>Tokens: {{ tokenUsage.input_tokens + tokenUsage.output_tokens }}</span>
+      </div>
+    </div>
+
+    <!-- Error Message -->
+    <div class="error-message" *ngIf="errorMessage">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="results" class="data-table">
+
+        <!-- Dictionary Name -->
+        <ng-container matColumnDef="dataMapName">
+          <th mat-header-cell *matHeaderCellDef>DICTIONARY NAME</th>
+          <td mat-cell *matCellDef="let row">
+            <a class="name-link">{{ row.dataMapName }}</a>
+          </td>
+        </ng-container>
+
+        <!-- Description -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef>DESCRIPTION</th>
+          <td mat-cell *matCellDef="let row" class="description-cell">
+            {{ row.description | slice:0:80 }}{{ row.description.length > 80 ? '...' : '' }}
+          </td>
+        </ng-container>
+
+        <!-- Number of Entries -->
+        <ng-container matColumnDef="numberOfEntries">
+          <th mat-header-cell *matHeaderCellDef>ENTRIES</th>
+          <td mat-cell *matCellDef="let row">{{ row.numberOfEntries || (row.keyValuePairs || row.keyValuePair || []).length }}</td>
+        </ng-container>
+
+        <!-- Status -->
+        <ng-container matColumnDef="isLocked">
+          <th mat-header-cell *matHeaderCellDef>STATUS</th>
+          <td mat-cell *matCellDef="let row">
+            <span class="status-badge" [ngClass]="row.isLocked ? 'status-locked' : 'status-active'">
+              <mat-icon class="status-icon">{{ row.isLocked ? 'lock' : 'check_circle' }}</mat-icon>
+              {{ row.isLocked ? 'Locked' : 'Active' }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Last Updated -->
+        <ng-container matColumnDef="updatedDate">
+          <th mat-header-cell *matHeaderCellDef>LAST UPDATED</th>
+          <td mat-cell *matCellDef="let row">{{ row.updatedDate | date:'MMM d, y' }}</td>
+        </ng-container>
+
+        <!-- Size -->
+        <ng-container matColumnDef="sizeInBytes">
+          <th mat-header-cell *matHeaderCellDef>SIZE</th>
+          <td mat-cell *matCellDef="let row">{{ formatSize(row.sizeInBytes || 0) }}</td>
+        </ng-container>
+
+        <!-- Actions -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button (click)="explainDataMap(row)" matTooltip="Get AI Explanation" class="explain-btn">
+              <mat-icon>psychology</mat-icon>
+            </button>
+            <button mat-icon-button [matMenuTriggerFor]="rowMenu" class="row-action-btn">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #rowMenu="matMenu">
+              <button mat-menu-item>View Details</button>
+              <button mat-menu-item>Edit</button>
+              <button mat-menu-item>Export</button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="data-row"></tr>
+      </table>
+
+      <!-- Loading Initial List -->
+      <div class="empty-state" *ngIf="loadingList">
+        <mat-spinner diameter="32"></mat-spinner>
+        <p>Loading data maps...</p>
+      </div>
+
+      <!-- Empty State after Search -->
+      <div class="empty-state" *ngIf="!loading && !loadingList && searched && results.length === 0">
+        <mat-icon>search_off</mat-icon>
+        <p>No data maps found for your search.</p>
+      </div>
+
+      <!-- Empty State: no list data and no search -->
+      <div class="empty-state" *ngIf="!loadingList && !loading && !searched && results.length === 0">
+        <mat-icon>auto_awesome</mat-icon>
+        <p>No data maps available.</p>
+      </div>
+    </div>
+
+    <!-- AI Explanation Panel -->
+    <mat-card class="explanation-panel" *ngIf="selectedDataMap">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>psychology</mat-icon>
+          AI Explanation: {{ selectedDataMap.dataMapName }}
+        </mat-card-title>
+        <button mat-icon-button (click)="selectedDataMap = null; explanation = ''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-card-header>
+      <mat-card-content>
+        <div *ngIf="loadingExplanation" class="explanation-loading">
+          <mat-spinner diameter="24"></mat-spinner>
+          <span>Generating explanation...</span>
+        </div>
+        <div *ngIf="!loadingExplanation && explanation" class="explanation-text">
+          {{ explanation }}
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+</div>
