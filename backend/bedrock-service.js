@@ -3,7 +3,7 @@ const { BedrockRuntimeClient, InvokeModelCommand } = require("@aws-sdk/client-be
 class BedrockService {
   constructor() {
     // Configure client
-    // Support both AWS_ prefixed (local dev) and non-prefixed (Amplify) env vars
+    // Support both AWS_ prefixed and non-prefixed env vars for flexibility
     const region = process.env.BEDROCK_REGION || process.env.AWS_REGION || "us-east-1";
     const bearerToken = process.env.BEDROCK_API_KEY || process.env.AWS_BEARER_TOKEN_BEDROCK;
 

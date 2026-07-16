@@ -6,8 +6,7 @@ import { DataMap, SearchResponse, ExplainResponse } from '../../shared/models/da
 
 @Injectable({ providedIn: 'root' })
 export class DatamapsSearchService {
-  // Use same Amplify domain - backend runs on compute
-  private apiUrl = 'https://main.d36ql8es41aodb.amplifyapp.com/api';
+  private apiUrl = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) {}
 
@@ -85,6 +84,6 @@ export class DatamapsSearchService {
   }
 
   checkHealth(): Observable<any> {
-    return this.http.get(`https://main.d36ql8es41aodb.amplifyapp.com/health`);
+    return this.http.get(`http://localhost:3000/health`);
   }
 }
