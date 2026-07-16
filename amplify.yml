@@ -4,18 +4,31 @@ backend:
     build:
       commands:
         # Install backend dependencies
-        - cd backend && npm install
-        # Create Lambda deployment package
-        - zip -r ../backend-lambda.zip . -x "node_modules/*" ".git/*"
-        - cd .. && mkdir -p .amplify-hosting/compute
-        - mv backend-lambda.zip .amplify-hosting/compute/default.zip
-        - echo "Backend Lambda package created"
+        - cd backend
+        - npm install --registry=https://registry.npmjs.org/
+        # Prepare Amplify Hosting Compute structure
+        - mkdir -p .amplify-hosting/compute/default
+        # Copy all backend files to compute directory
+        - cp server.js .amplify-hosting/compute/default/
+        - cp bedrock-service.js .amplify-hosting/compute/default/
+        - cp package.json .amplify-hosting/compute/default/
+        - cp .npmrc .amplify-hosting/compute/default/
+        - cp -r node_modules .amplify-hosting/compute/default/
+        # Copy mock data from frontend
+        - cp ../src/app/shared/data/mock-datamaps.json .amplify-hosting/compute/default/
+        # Copy deployment manifest
+        - cp deploy-manifest.json .amplify-hosting/
+        - echo "Backend compute package created"
+        - cd ..
+  artifacts:
+    baseDirectory: backend/.amplify-hosting
+    files:
+      - '**/*'
 frontend:
   phases:
     preBuild:
       commands:
-        - npm cache clean --force || true
-        - npm install --legacy-peer-deps
+        - npm install
     build:
       commands:
         - npm run build
