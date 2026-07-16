@@ -22,9 +22,6 @@
     {
       "path": "/*",
       "target": {
-        "kind": "Static"
-      },
-      "fallback": {
         "kind": "Static",
         "src": "/index.html"
       }
