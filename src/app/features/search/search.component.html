@@ -46,15 +46,11 @@
     <div class="page-title-row">
       <h1 class="page-title">Data Maps</h1>
       <div class="title-actions">
-        <button mat-stroked-button class="action-btn">
-          <mat-icon>download</mat-icon> Import
-        </button>
-        <button mat-stroked-button class="action-btn">
-          <mat-icon>upload</mat-icon> Export
-        </button>
-        <button mat-flat-button color="primary" class="new-btn">
-          <mat-icon>add</mat-icon> New Data Map
-        </button>
+        <span matTooltip="Not available in prototype - Read-only demo" matTooltipPosition="below">
+          <button mat-flat-button color="primary" class="new-btn" disabled>
+            <mat-icon>add</mat-icon> New Data Map
+          </button>
+        </span>
       </div>
     </div>
 
@@ -205,7 +201,6 @@
             <mat-menu #rowMenu="matMenu">
               <button mat-menu-item>View Details</button>
               <button mat-menu-item>Edit</button>
-              <button mat-menu-item>Export</button>
             </mat-menu>
           </td>
         </ng-container>

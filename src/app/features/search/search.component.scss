@@ -164,6 +164,13 @@ $bg-page: #F4F6FA;
       mat-icon { font-size: 16px; margin-right: 4px; vertical-align: middle; }
 
       &:hover { background: $cxone-blue-dark; }
+
+      &:disabled {
+        background: $cxone-blue !important;
+        color: #fff !important;
+        cursor: not-allowed;
+        opacity: 1;
+      }
     }
   }
 }
