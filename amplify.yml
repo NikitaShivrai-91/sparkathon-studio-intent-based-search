@@ -3,7 +3,7 @@ backend:
   phases:
     build:
       commands:
-        - cd backend && npm install
+        - (cd backend && npm install)
         - echo "Backend built successfully"
 frontend:
   phases:
