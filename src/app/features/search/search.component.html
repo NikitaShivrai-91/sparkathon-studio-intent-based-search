@@ -127,10 +127,6 @@
         <mat-icon>check_circle</mat-icon>
         <span>Found <strong>{{ totalResults }}</strong> result(s) for "<strong>{{ searchQuery }}</strong>"</span>
       </div>
-      <div class="token-usage" *ngIf="tokenUsage">
-        <mat-icon>analytics</mat-icon>
-        <span>Tokens: {{ tokenUsage.input_tokens + tokenUsage.output_tokens }}</span>
-      </div>
     </div>
 
     <!-- Error Message -->
