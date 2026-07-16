@@ -6,7 +6,7 @@ import { DataMap, SearchResponse, ExplainResponse } from '../../shared/models/da
 
 @Injectable({ providedIn: 'root' })
 export class DatamapsSearchService {
-  private apiUrl = 'http://localhost:3000/api';
+  private apiUrl = 'https://mtijkwbhpd.us-east-1.awsapprunner.com/api';
 
   constructor(private http: HttpClient) {}
 
@@ -84,6 +84,6 @@ export class DatamapsSearchService {
   }
 
   checkHealth(): Observable<any> {
-    return this.http.get(`http://localhost:3000/health`);
+    return this.http.get(`https://mtijkwbhpd.us-east-1.awsapprunner.com/health`);
   }
 }
