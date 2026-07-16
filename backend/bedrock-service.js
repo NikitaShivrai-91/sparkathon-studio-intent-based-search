@@ -3,22 +3,26 @@ const { BedrockRuntimeClient, InvokeModelCommand } = require("@aws-sdk/client-be
 class BedrockService {
   constructor() {
     // Configure client
+    // Support both AWS_ prefixed (local dev) and non-prefixed (Amplify) env vars
+    const region = process.env.BEDROCK_REGION || process.env.AWS_REGION || "us-east-1";
+    const bearerToken = process.env.BEDROCK_API_KEY || process.env.AWS_BEARER_TOKEN_BEDROCK;
+
     const clientConfig = {
-      region: process.env.AWS_REGION || "us-east-1"
+      region: region
     };
 
     this.client = new BedrockRuntimeClient(clientConfig);
 
     // Add bearer token middleware for Bedrock API key authentication
     // API keys use Bearer token authentication, NOT IAM credentials
-    if (process.env.AWS_BEARER_TOKEN_BEDROCK) {
+    if (bearerToken) {
       this.client.middlewareStack.add(
         (next) => async (args) => {
           // Add Authorization header with Bearer token
           if (!args.request.headers) {
             args.request.headers = {};
           }
-          args.request.headers["Authorization"] = `Bearer ${process.env.AWS_BEARER_TOKEN_BEDROCK}`;
+          args.request.headers["Authorization"] = `Bearer ${bearerToken}`;
           return next(args);
         },
         {
