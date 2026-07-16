@@ -2,8 +2,8 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files and .npmrc
-COPY package*.json .npmrc ./
+# Copy only package.json and .npmrc (skip package-lock.json)
+COPY package.json .npmrc ./
 
 # Install dependencies using public npm registry
 RUN npm install --registry=https://registry.npmjs.org/
