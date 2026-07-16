@@ -6,10 +6,27 @@
   },
   "routes": [
     {
-      "path": "/*",
+      "path": "/api/*",
       "target": {
         "kind": "Compute",
         "src": "default"
+      }
+    },
+    {
+      "path": "/health",
+      "target": {
+        "kind": "Compute",
+        "src": "default"
+      }
+    },
+    {
+      "path": "/*",
+      "target": {
+        "kind": "Static"
+      },
+      "fallback": {
+        "kind": "Static",
+        "src": "/index.html"
       }
     }
   ],
