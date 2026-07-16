@@ -22,8 +22,7 @@
     {
       "path": "/*",
       "target": {
-        "kind": "Static",
-        "src": "/index.html"
+        "kind": "Static"
       }
     }
   ],
