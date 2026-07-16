@@ -8,7 +8,12 @@ class BedrockService {
     const bearerToken = process.env.BEDROCK_API_KEY || process.env.AWS_BEARER_TOKEN_BEDROCK;
 
     const clientConfig = {
-      region: region
+      region: region,
+      // Disable credential providers when using API key
+      credentials: bearerToken ? {
+        accessKeyId: 'NONE',
+        secretAccessKey: 'NONE'
+      } : undefined
     };
 
     this.client = new BedrockRuntimeClient(clientConfig);
